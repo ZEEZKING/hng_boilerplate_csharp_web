@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hng.Application.Features.UserManagement.Commands
 {
-    public class CreateUserLoginCommand : IRequest<UserLoginResponseDto>
+    public class CreateUserLoginCommand : IRequest<AuthResponseDto>
     {
         public CreateUserLoginCommand(UserLoginRequestDto loginRequest)
         {

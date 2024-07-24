@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hng.Application.Features.UserManagement.Dtos
 {
-    public class UserLoginResponseDto
+    public class AuthResponseDto
     {
         public string Message { get; set; }
         public UserDto Data { get; set; }

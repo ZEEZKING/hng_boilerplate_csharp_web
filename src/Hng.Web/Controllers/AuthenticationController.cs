@@ -1,7 +1,7 @@
-﻿using Hng.Application.Features.UserManagement.Commands;
+﻿using System.Net;
+using Hng.Application.Features.UserManagement.Commands;
 using Hng.Application.Features.UserManagement.Dtos;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hng.Web.Controllers
@@ -18,9 +18,9 @@ namespace Hng.Web.Controllers
         }
 
         [HttpPost("login")]
-        [ProducesResponseType(typeof(UserLoginResponseDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(AuthResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<UserLoginResponseDto>> Login([FromBody] UserLoginRequestDto loginRequest)
+        public async Task<ActionResult<AuthResponseDto>> Login([FromBody] UserLoginRequestDto loginRequest)
         {
             var command = new CreateUserLoginCommand(loginRequest);
             var response = await _mediator.Send(command);
@@ -36,6 +36,23 @@ namespace Hng.Web.Controllers
             }
 
             return Ok(response);
+        }
+
+        [HttpPost("register")]
+        [ProducesResponseType(typeof(AuthResponseDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<AuthResponseDto>> Register([FromBody] UserRegisterRequestDto registerRequest)
+        {
+            var command= new UserRegisterCommand(registerRequest);
+            var response= await _mediator.Send(command);
+
+            if (response is null)
+                return Unauthorized(new AuthResponseDto{
+                    Message="User Already Exists",
+                    Data=null,
+                    access_token=null
+                });
+            return CreatedAtAction("Register",response);
         }
     }
 }
