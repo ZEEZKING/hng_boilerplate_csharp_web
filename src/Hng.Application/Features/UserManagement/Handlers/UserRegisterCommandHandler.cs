@@ -38,7 +38,7 @@ namespace Hng.Application.Features.UserManagement.Handlers
             var response= new AuthResponseDto{
                 Message="Success",
                 Data=_mapper.Map<UserDto>(user),
-                access_token=_tokenService.GenerateJwt(user)
+                AccessToken=_tokenService.GenerateJwt(user)
             };
             return response;
 

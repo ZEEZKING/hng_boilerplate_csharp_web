@@ -50,7 +50,7 @@ namespace Hng.Web.Controllers
                 return Unauthorized(new AuthResponseDto{
                     Message="User Already Exists",
                     Data=null,
-                    access_token=null
+                    AccessToken=null
                 });
             return CreatedAtAction("Register",response);
         }
