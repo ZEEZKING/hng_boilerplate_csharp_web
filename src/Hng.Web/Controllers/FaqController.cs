@@ -45,12 +45,7 @@ public class FaqController : ControllerBase
     {
         var query = new GetAllFaqsQuery();
         var result = await _mediator.Send(query);
-        return Ok(new
-        {
-            Status = 200,
-            Message = "FAQs retrieved successfully",
-            Data = result
-        });
+        return StatusCode(result.StatusCode, result);
     }
 }
 

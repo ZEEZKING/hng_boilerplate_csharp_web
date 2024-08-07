@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hng.Application.Features.Faq.Queries
 {
-    public class GetAllFaqsQuery : IRequest<List<FaqResponseDto>>
+    public class GetAllFaqsQuery : IRequest<GetAllFaqsResponseDto>
     {
     }
 }
