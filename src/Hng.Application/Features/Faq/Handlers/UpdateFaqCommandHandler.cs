@@ -18,7 +18,7 @@ public class UpdateFaqCommandHandler : IRequestHandler<UpdateFaqCommand, UpdateF
 
     public async Task<UpdateFaqResponseDto> Handle(UpdateFaqCommand request, CancellationToken cancellationToken)
     {
-        var faq = await _repository.GetAsync(request.Id);
+        var faq = await _repository.GetBySpec(x => x.Id == request.Id);
         if (faq == null)
         {
             return new UpdateFaqResponseDto

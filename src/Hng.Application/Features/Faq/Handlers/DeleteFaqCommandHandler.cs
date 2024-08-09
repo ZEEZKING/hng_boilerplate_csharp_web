@@ -15,7 +15,7 @@ public class DeleteFaqCommandHandler : IRequestHandler<DeleteFaqCommand, DeleteF
 
     public async Task<DeleteFaqResponseDto> Handle(DeleteFaqCommand request, CancellationToken cancellationToken)
     {
-        var faq = await _repository.GetAsync(request.Id);
+        var faq = await _repository.GetBySpec(x => x.Id == request.Id);
         if (faq == null)
         {
             return new DeleteFaqResponseDto
